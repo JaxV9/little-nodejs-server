@@ -17,7 +17,10 @@ app.get('/', (req, res) => {
     // res.json('ip address: http://' + ip.address() + ':' + PORT);
     res.json('hello')
 });
-
+let object = "";
+app.get('/box', (req, res) => {
+    res.send({"box": object});
+});
 io.on('connection', (socket) => {
     console.log('a user connected');
     socket.broadcast.emit('user connected');
@@ -27,6 +30,7 @@ io.on('connection', (socket) => {
     });
     socket.on('message', (msg) => {
         console.log('message: ' + msg['message']);
+        object = msg['message']
         io.emit('box', {'name': msg['message']});
     });
 })
