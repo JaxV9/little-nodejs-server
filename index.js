@@ -20,6 +20,7 @@ app.get('/', (req, res) => {
 let object = "";
 app.get('/box', (req, res) => {
     res.send({"box": object});
+    object = "";
 });
 io.on('connection', (socket) => {
     console.log('a user connected');
